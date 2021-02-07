@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "cstdio": "cpp",
-        "stdexcept": "cpp",
-        "unordered_map": "cpp"
-    }
-}
