@@ -29,6 +29,5 @@ int main()
     }
     cout << encoder.huffmanTreeRoot->weight << endl;
 
-    print_hello();
     return 0;
 }

@@ -10,8 +10,6 @@
 
 using namespace std;
 
-void print_hello();
-
 class Huffman {
     private:
         struct TreeNode {
@@ -22,20 +20,21 @@ class Huffman {
             TreeNode(short _val, uint32_t _weight) : val(_val), weight(_weight), left(nullptr), right(nullptr) {}
         };
 
-        struct nodePtrCmp {
+        /** Comparison rules: Sort by weight from small to large. */
+        struct nodePtrCmpare {
             bool operator() (TreeNode* a, TreeNode* b) {
                 return (a -> weight) >= (b -> weight);
             }
         };
 
-        // 队列中存放树节点，并且按照权值由小到大排列
-        priority_queue<TreeNode*, vector<TreeNode*>, nodePtrCmp> nodeQueue;
+        /** The sorted node queue */
+        priority_queue<TreeNode*, vector<TreeNode*>, nodePtrCmpare> nodeQueue;
 
     public:
         Huffman(void);
         ~Huffman(void);
 
-        // 最终编码好的哈夫曼数的根节点，由这个节点可以便利任一节点
+        /** The root node of the eventual Huffman tree. */
         TreeNode *huffmanTreeRoot;
 
         void buildWeightMap(const short* dataPtr, uint32_t dataSize, unordered_map<short, uint32_t>& weightMap);

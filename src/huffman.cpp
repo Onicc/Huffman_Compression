@@ -51,7 +51,6 @@ void Huffman::buildHuffmanTree(const unordered_map<short, uint32_t> &weightMap) 
         nodeQueue.push(parentNode);
     }
 
-    /** The root node of the eventual Huffman tree. */
     huffmanTreeRoot = nodeQueue.top();
 }
 
@@ -69,8 +68,4 @@ void Huffman::buildHuffmanCode(unordered_map<short, HuffmanCode> &huffmanCodeMap
     
     HuffmanCode tempCode;
     DFSTree(huffmanTreeRoot, tempCode, huffmanCodeMap);
-}
-
-void print_hello() {
-    printf("hello");
 }
