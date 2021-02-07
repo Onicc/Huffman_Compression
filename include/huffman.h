@@ -6,6 +6,8 @@
 #include <queue>
 #include <unordered_map>
 
+#include "huffmanCode.h"
+
 using namespace std;
 
 void print_hello();
@@ -38,6 +40,8 @@ class Huffman {
 
         void buildWeightMap(const short* dataPtr, uint32_t dataSize, unordered_map<short, uint32_t>& weightMap);
         void buildHuffmanTree(const unordered_map<short, uint32_t> &weightMap);
+        void DFSTree(TreeNode* treeNode, HuffmanCode& tempCode, unordered_map<short, HuffmanCode> &huffmanCodeMap);
+        void buildHuffmanCode(unordered_map<short, HuffmanCode> &huffmanCodeMap);
 };
 
 #endif

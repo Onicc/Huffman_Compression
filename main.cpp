@@ -16,7 +16,6 @@ int main()
 
     int frameSize = 72*72;
     auto frameDataPtr = new short[frameSize];
-    // unordered_map内存按键值对存储，键：数；值：数出现的次数
     unordered_map <short, uint32_t> weightMap;
     fread(frameDataPtr, sizeof(short), frameSize, fp);
     fclose(fp);

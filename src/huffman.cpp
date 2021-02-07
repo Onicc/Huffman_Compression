@@ -30,15 +30,16 @@ void Huffman::buildWeightMap(const short* dataPtr, uint32_t dataSize, unordered_
 }
 
 void Huffman::buildHuffmanTree(const unordered_map<short, uint32_t> &weightMap) {
-    // 迭代器遍历权值map，将数和对应的权值构建成节点传入队列
+    /** The iterator traverses the weight map, passing the values and weights into the queue as nodes */
     for (const auto &iter : weightMap) {
         nodeQueue.push(new TreeNode(iter.first, iter.second));
     }
 
-    // 由于nodeQueue会按照权值由到大排序，一次出栈两个节点， 
-    // 这两个节点肯定是权值最小的两个节点，由这两个节点构成一个树，
-    // 该树的权值为nodeQueue取出权值之和，将该树的根节点传入队列
-    // 次数队列重新排序，再次循环取前两个节点计算，直到队列的所有节点被构成一个树
+    /** 
+     * The node queues are arranged from small to large by weight, 
+     * and then two nodes are taken out to synthesize the new nodes, 
+     * and then the new nodes are sorted into the queue until all nodes form a Huffman tree.
+     */
     while (nodeQueue.size() > 1) {
         TreeNode* rightNode = nodeQueue.top();
         nodeQueue.pop();
@@ -50,11 +51,26 @@ void Huffman::buildHuffmanTree(const unordered_map<short, uint32_t> &weightMap) 
         nodeQueue.push(parentNode);
     }
 
-    // 最终哈夫曼树的根节点
+    /** The root node of the eventual Huffman tree. */
     huffmanTreeRoot = nodeQueue.top();
 }
 
-void print_hello()
-{
+void Huffman::DFSTree(TreeNode* treeNode, HuffmanCode& tempCode, unordered_map<short, HuffmanCode> &huffmanCodeMap) {
+    /** Traverse to the leaf node and match the leaf node value to the encoding. */
+    if (treeNode -> left == nullptr && treeNode -> right == nullptr) {
+        huffmanCodeMap[treeNode -> val] = tempCode;
+        return;
+    }
+}
+
+void Huffman::buildHuffmanCode(unordered_map<short, HuffmanCode> &huffmanCodeMap) {
+    if (huffmanTreeRoot == nullptr)
+        return;
+    
+    HuffmanCode tempCode;
+    DFSTree(huffmanTreeRoot, tempCode, huffmanCodeMap);
+}
+
+void print_hello() {
     printf("hello");
 }
