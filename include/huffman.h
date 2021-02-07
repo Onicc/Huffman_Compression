@@ -40,7 +40,8 @@ class Huffman {
         void buildWeightMap(const short* dataPtr, uint32_t dataSize, unordered_map<short, uint32_t>& weightMap);
         void buildHuffmanTree(const unordered_map<short, uint32_t> &weightMap);
         void DFSTree(TreeNode* treeNode, HuffmanCode& tempCode, unordered_map<short, HuffmanCode> &huffmanCodeMap);
-        void buildHuffmanCode(unordered_map<short, HuffmanCode> &huffmanCodeMap);
+        void buildHuffmanCodeMap(unordered_map<short, HuffmanCode> &huffmanCodeMap);
+        uint32_t getEncoderBitSize(const unordered_map<short, uint32_t> &weightMap, const unordered_map<short, HuffmanCode> &huffmanCodeMap);
 };
 
 #endif

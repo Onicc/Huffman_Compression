@@ -60,12 +60,35 @@ void Huffman::DFSTree(TreeNode* treeNode, HuffmanCode& tempCode, unordered_map<s
         huffmanCodeMap[treeNode -> val] = tempCode;
         return;
     }
+
+    tempCode.push(0);
+    DFSTree(treeNode -> left, tempCode, huffmanCodeMap);
+    tempCode.pop();
+    tempCode.push(1);
+    DFSTree(treeNode -> right, tempCode, huffmanCodeMap);
+    tempCode.pop();
 }
 
-void Huffman::buildHuffmanCode(unordered_map<short, HuffmanCode> &huffmanCodeMap) {
+void Huffman::buildHuffmanCodeMap(unordered_map<short, HuffmanCode> &huffmanCodeMap) {
     if (huffmanTreeRoot == nullptr)
         return;
     
     HuffmanCode tempCode;
     DFSTree(huffmanTreeRoot, tempCode, huffmanCodeMap);
+}
+
+uint32_t Huffman::getEncoderBitSize(const unordered_map<short, uint32_t> &weightMap, const unordered_map<short, HuffmanCode> &huffmanCodeMap) {
+    short value;
+    uint32_t weight;
+    uint32_t oneCodeLen;
+    uint32_t totalCodeLen = 0;
+
+    for (const auto &iter : weightMap) {
+        value = iter.first;
+        weight = iter.second;
+        oneCodeLen = static_cast<uint32_t >(huffmanCodeMap.at(value).getLen());
+        totalCodeLen += weight * oneCodeLen;
+    }
+
+    return totalCodeLen;
 }
