@@ -15,32 +15,13 @@ int main()
         throw MyException("Failed to open file");
     }
 
-    int frameSize = 72*72*37059;
-    auto frameDataPtr = new short[frameSize];
-    unordered_map <short, uint32_t> weightMap;
-    fread(frameDataPtr, sizeof(short), frameSize, fp);
+    int dataSize = 72*72*10;
+    auto dataPtr = new short[dataSize];
+    fread(dataPtr, sizeof(short), dataSize, fp);
     fclose(fp);
 
     Huffman encoder;
-    encoder.buildWeightMap(frameDataPtr, frameSize, weightMap);
-    encoder.buildHuffmanTree(weightMap);
-    unordered_map<short, HuffmanCode> huffmanCodeMap;
-    encoder.buildHuffmanCodeMap(huffmanCodeMap);
-
-    for (const auto &iter : weightMap) {
-        cout << iter.first << " " << iter.second << endl;
-    }
-    cout << encoder.huffmanTreeRoot->weight << endl;
-
-    cout << "encoder" << endl;
-    for (const auto &iter : huffmanCodeMap) {
-        cout << iter.first << " " << bitset<8>(iter.second.getByteData()[1]) << bitset<8>(iter.second.getByteData()[0]) \
-        << " " << iter.second.getLen() << endl;
-    }
-    // 10,368
-    // 1207
-    // 11.64%
-    cout << "total:" << encoder.getEncoderBitSize(weightMap, huffmanCodeMap) << endl;
+    encoder.encode(dataPtr, dataSize);
 
     return 0;
 }

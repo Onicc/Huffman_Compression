@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstring>
+#include <iostream>
 #include "exception.h"
 #include "huffmanCode.h"
 
@@ -7,7 +8,7 @@ using namespace std;
 
 HuffmanCode::HuffmanCode() {
     len = 0;
-    byteNum = 16;
+    bitNum = 16;
     blockNum = pow(2, 16) / 8;
     byteData = new unsigned char[blockNum];
     memset(byteData, 0, blockNum);
