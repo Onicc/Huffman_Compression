@@ -111,22 +111,22 @@ void Huffman::encode(const short *dataPtr, uint32_t dataSize) {
     compressionRatio = float(encodedBitNum * 100.0) / unencodeBitNum;
 
     cout << "-------------------------------------------------" << endl;
-    cout << left << setw(8) << "value" \
-         << left << setw(8) << "weigth"\
-         << left << setw(8) << "bits"\
-         << left << setw(8) << "code"\
+    cout << left << setw(10) << "value" \
+         << left << setw(10) << "weigth"\
+         << left << setw(10) << "bits"\
+         << left << setw(10) << "code"\
          << endl;
     for (const auto &iter : weightMap) {
         unsigned char *byteData = huffmanCodeMap.at(iter.first).getByteData();
         uint32_t oneCodeBits = huffmanCodeMap.at(iter.first).getLen();
-        cout << left << setw(8) << iter.first \
-             << left << setw(8) << iter.second \
-             << left << setw(8) << oneCodeBits \
+        cout << left << setw(10) << iter.first \
+             << left << setw(10) << iter.second \
+             << left << setw(10) << oneCodeBits \
              << bitset<8>(byteData[2]) << bitset<8>(byteData[1]) << bitset<8>(byteData[0])<< endl;
     }
     cout << "-------------------------------------------------" << endl;
-    cout << "Unencoded bits: " << unencodeBitNum << endl;
-    cout << "Encoded bits: " << encodedBitNum << endl;
+    cout << "Unencoded bits: " << unencodeBitNum << " bit" << endl;
+    cout << "Encoded bits: " << encodedBitNum << " bit" << endl;
     cout << "Compression ratio: " << setprecision(4) << compressionRatio << "%" << endl;
     cout << "-------------------------------------------------" << endl;
 }

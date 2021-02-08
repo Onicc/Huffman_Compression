@@ -15,7 +15,7 @@ int main()
         throw MyException("Failed to open file");
     }
 
-    int dataSize = 72*72*10;
+    int dataSize = 72*72*37059;
     auto dataPtr = new short[dataSize];
     fread(dataPtr, sizeof(short), dataSize, fp);
     fclose(fp);
